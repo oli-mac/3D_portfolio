@@ -7,3 +7,4 @@ a MERN stalk Portfolio project
   * [x] Setup Tailwindcss
   * [x] Setup constants
 * [x] Setup project Folder
+* [x] Import Components
