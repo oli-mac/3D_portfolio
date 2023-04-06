@@ -54,13 +54,13 @@ const NavBar = () => {
                 target={'_blank'}
                 whileHover={{y: -2}}
                 whileTap={{scale: 0.9}}
-                className='w-6 mr-3'>
+                className='w-6 mx-3'>
                     <GithubIcon /> 
             </motion.a>
             <motion.a 
                 whileHover={{y: -2}}
                 whileTap={{scale: 0.9}}
-                className='w-6 mr-3'
+                className='w-6 mx-3'
                 href="https://www.linkedin.com/in/olyad-mulugeta-79875621b/" 
                 target={'_blank'}> 
                 <LinkedInIcon /> 
@@ -68,7 +68,7 @@ const NavBar = () => {
             <motion.a 
                 whileHover={{y: -2}}
                 whileTap={{scale: 0.9}}
-                className='w-6 mr-3'
+                className='w-6 mx-3'
                 href="https://www.linkedin.com/in/olyad-mulugeta-79875621b/" 
                 target={'_blank'}> 
                 <PinterestIcon />
@@ -76,7 +76,7 @@ const NavBar = () => {
             <motion.a 
                 whileHover={{y: -2}}
                 whileTap={{scale: 0.9}}
-                className='w-6 mr-3'
+                className='w-6 ml-3'
                 href="https://www.linkedin.com/in/olyad-mulugeta-79875621b/" 
                 target={'_blank'}> 
                 <DribbbleIcon /> 
