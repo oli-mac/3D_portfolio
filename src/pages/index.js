@@ -5,6 +5,7 @@ import profilePic from "../../public/images/profile/developer-pic-1.png"
 import AnimatedText from '@/components/AnimatedText'
 import Link from 'next/link'
 import { LinkArrow } from '@/components/Icon'
+import HireMe from '@/components/HireMe'
 
 
 export default function Home() {
@@ -40,6 +41,7 @@ export default function Home() {
           </div>
 
         </Layout>
+        <HireMe />
       </main>
     </>
   )
