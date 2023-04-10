@@ -6,6 +6,7 @@ import React, { useRef } from 'react'
 import ProfilePic from "../../public/images/profile/olyad.png"
 import { useInView, useMotionValue, useSpring } from 'framer-motion'
 import { useEffect } from 'react'
+import Skills from '@/components/Skills'
 
 
 const AnimatedNumbers = ({value}) =>{
@@ -13,7 +14,7 @@ const ref = useRef(null)
 
 const motionValue = useMotionValue(0);
 const springValue = useSpring(motionValue, { duration: 3000 });
-const isInView = useInView(ref);
+const isInView = useInView(ref, {once: true});
 
 useEffect(() => {
   if(isInView){
@@ -83,6 +84,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
+                <Skills />
             </Layout>
         </main>
     </>
