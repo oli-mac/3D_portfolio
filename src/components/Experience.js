@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { useScroll } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const Details = ({position, company, companyLink, time, address, work}) =>{
     return <li className='my-8 first:mt-0 last:mb-0 w-[60%] mx-auto flex flex-col items-center justify-between'>
@@ -13,12 +15,23 @@ const Details = ({position, company, companyLink, time, address, work}) =>{
 }
 
 const Experience = () => {
+
+    const ref = useRef(null);
+    const {scrollYProgress} = useScroll(
+        {
+            target: ref,
+            offset: ["start end", "center start"]
+        }
+    );
+
   return (
     <div className='my-64'>
         <h2 className='font-bold text-8xl mb-32 w-full text-center'>Experience</h2>
         
-        <div className='w-[75%] mx-auto relative'>
-            <ul>
+        <div ref={ref} className='w-[75%] mx-auto relative'>
+            <motion.div style={{scaleY: scrollYProgress}} className='absolute left-8 top-0 w-[4px] h-full bg-dark origin-top'/>
+
+            <ul className='w-full flex flex-col items-start justify-between ml-4'>
                 <Details 
                     position="Software Engineer"  
                     companyLink="www.olyadmulugeta.live"
@@ -34,17 +47,6 @@ const Experience = () => {
                     position="Co Founder Ceo"  
                     companyLink="www.olyadmulugeta.live"
                     company="DaguEthioED"
-                    time="2022-Present"
-                    address= "Addis Ababa, eT" 
-                    work="Worked on a team responsible for developing new features for Google's 
-                    search engine, including improving the accuracy and relevance of search results and 
-                    developing new tools for data analysis and visualization."
-                
-                />
-                <Details 
-                    position="Software Engineer"  
-                    companyLink="www.olyadmulugeta.live"
-                    company="Telet Tech"
                     time="2022-Present"
                     address= "Addis Ababa, eT" 
                     work="Worked on a team responsible for developing new features for Google's 
