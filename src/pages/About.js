@@ -7,6 +7,7 @@ import ProfilePic from "../../public/images/profile/olyad.png"
 import { useInView, useMotionValue, useSpring } from 'framer-motion'
 import { useEffect } from 'react'
 import Skills from '@/components/Skills'
+import Experience from '@/components/Experience'
 
 
 const AnimatedNumbers = ({value}) =>{
@@ -85,6 +86,7 @@ const About = () => {
                     </div>
                 </div>
                 <Skills />
+                <Experience />
             </Layout>
         </main>
     </>
