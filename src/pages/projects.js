@@ -77,7 +77,7 @@ const projects = () => {
   return (
     <>
       <Head>
-          <title>Olyad Mulugeta| projects Page</title>
+          <title>Olyad Mulugeta|My Projects</title>
           <meta name="description" content="About me" />
       </Head>
       <main className='w-full mb-16 flrx flex-col items-center justify-center'>

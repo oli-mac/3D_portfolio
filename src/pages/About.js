@@ -42,7 +42,7 @@ const About = () => {
   return (
     <>
         <Head>
-            <title>Olyad Mulugeta| About Page</title>
+            <title>Olyad Mulugeta| About Me</title>
             <meta name="description" content="About me" />
         </Head>
         <main className='flex w-full flex-col items-center justify-center mb-16'>
