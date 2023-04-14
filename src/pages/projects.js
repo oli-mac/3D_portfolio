@@ -84,7 +84,7 @@ const projects = () => {
         <Layout className='pt-16 pb-20 px-12'>
           <AnimatedText text="Imagination Trumps Knowledge!" className='mb-16'/>
 
-          <div className='grid grid-cols-12 gap-24'>
+          <div className='grid grid-cols-12 gap-24 gap-y-32'>
             <div className='col-span-12'>
                 <FeaturedProject
                 title=" React Portfolio Website"

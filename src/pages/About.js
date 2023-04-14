@@ -46,7 +46,7 @@ const About = () => {
             <meta name="description" content="About me" />
         </Head>
         <main className='flex w-full flex-col items-center justify-center mb-16'>
-            <Layout className='pt-16'>
+            <Layout className='pt-16 px-12'>
                  <AnimatedText text='Passion Fuels Purpose! ' className='mb-16'/>
                 <div className='grid w-full grid-cols-8 gap-16'>
                     <div className='col-span-3 flex ml-16 flex-col items-start justify-start'>
