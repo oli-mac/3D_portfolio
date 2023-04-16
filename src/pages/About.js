@@ -45,7 +45,7 @@ const About = () => {
             <title>Olyad Mulugeta| About Me</title>
             <meta name="description" content="About me" />
         </Head>
-        <main className='flex w-full flex-col items-center justify-center mb-16'>
+        <main className='flex w-full flex-col items-center justify-center mb-16 dark:text-light'>
             <Layout className='pt-16 px-12'>
                  <AnimatedText text='Passion Fuels Purpose! ' className='mb-16'/>
                 <div className='grid w-full grid-cols-8 gap-16'>
@@ -74,15 +74,15 @@ const About = () => {
                        
                         <div className='flex flex-col items-end justify-center'>
                             <span className='inline-block text-7xl font-bold'><AnimatedNumbers value={10}/>+</span>
-                            <h2 className='text-xl font-medium capitalize text-dark/75'>Satisfied clients</h2>
+                            <h2 className='text-xl font-medium capitalize text-dark/75 dark:text-light/75'>Satisfied clients</h2>
                         </div>
                         <div className='flex flex-col items-end justify-center'>
                             <span className='inline-block text-7xl font-bold'><AnimatedNumbers value={15}/>+</span>
-                            <h2 className='text-xl font-medium capitalize text-dark/75'>Projects Completed</h2>
+                            <h2 className='text-xl font-medium capitalize text-dark/75 dark:text-light/75'>Projects Completed</h2>
                         </div>
                         <div className='flex flex-col items-end justify-center'>
                             <span className='inline-block text-7xl font-bold'><AnimatedNumbers value={2}/>+</span>
-                            <h2 className='text-xl font-medium capitalize text-dark/75'>Yeard Of Experience</h2>
+                            <h2 className='text-xl font-medium capitalize text-dark/75 dark:text-light/75'>Yeard Of Experience</h2>
                         </div>
                     </div>
                 </div>
