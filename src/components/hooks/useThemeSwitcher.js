@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 const useThemeSwitcher = () => {
 
-    const preferDarkQuery = "{prefer-color-scheme: dark}";
+    const preferDarkQuery = "{prefer-pcolor-scheme: dark}";
     const [mode, setMode] = useState("");
     
     useEffect(() => {
@@ -38,10 +38,19 @@ const useThemeSwitcher = () => {
         
 
     }, [])
+
+    useEffect(() => {
+      if (mode === "dark") {
+        window.localStorage.setItem("theme","dark");
+        document.documentElement.classList.add("dark");
+      }else{
+        window.localStorage.setItem("theme","light");
+        document.documentElement.classList.remove("dark");
+      }
+    }, [mode])
     
-  return (
-    <div>useThemeSwitcher</div>
-  )
+    
+  return [mode, setMode]
 }
 
 export default useThemeSwitcher
