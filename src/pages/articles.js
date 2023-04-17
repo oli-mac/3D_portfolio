@@ -150,7 +150,7 @@ const articles = () => {
         <main className='w-full mb-16 flex flex-col items-center justify-center overflow-hidden dark:text-light'>
             <Layout className='pt-16 px-0'>
                 <AnimatedText text="Hard Work Pays Off! " className='mb-16'/>
-                <ul className='grid grid-cols-2 gap-16'>
+                <ul className='grid grid-cols-2 gap-16 lg:flex lg:flex-col'>
                     <Education />
 
                    
