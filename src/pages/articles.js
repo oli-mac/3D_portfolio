@@ -7,7 +7,11 @@ import { motion, useMotionValue } from 'framer-motion'
 import project1 from "../../public/images/projects/portfolio-cover-image.jpg"
 import article1 from "../../public/images/articles/pagination component in reactjs.jpg"
 import article2 from "../../public/images/articles/create loading screen in react js.jpg"
+import { GithubIcon } from '@/components/Icon'
+import { LinkArrow } from '@/components/Icon'
 
+import Experience from '@/components/Experience'
+import Education from '@/components/Education'
 
 
 import AnimatedText from '@/components/AnimatedText'
@@ -50,51 +54,85 @@ const MovingImg = ({img, title,  link}) => {
     )
 }
 
-const Articles = ({img, title, date,  link}) => {
-    return(
-        <motion.li 
-        initial={{y:200}}
-        whileInView={{y:0, transition:{duration:0.5, ease:"easeInOut"}}}
-        viewport={{once: true}}
-        className='relative w-full p-4 py-6 my-4 flex rounded-xl flex items-center justify-between bg-light text-dark
-        first:mt-0 border border-solid border-dark border-r-4 border-b-4'
-        >
-         <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark rounded-br-3xl
-         '/>
-        <MovingImg title={title} img={img} link={link} />
-        <Link  href={link} target='_blank'
-             className='w-full inline-block cursor-pointer overflow-hidden rounded-lg'
-        >
+// const Articles = ({img, title, date,  link}) => {
+//     return(
+//         <motion.li 
+//         initial={{y:200}}
+//         whileInView={{y:0, transition:{duration:0.5, ease:"easeInOut"}}}
+//         viewport={{once: true}}
+//         className='relative w-full p-4 py-6 my-4 flex rounded-xl items-center justify-between bg-light text-dark
+//         first:mt-0 border border-solid border-dark border-r-4 border-b-4'
+//         >
+//          <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark rounded-br-3xl
+//          '/>
+//         <MovingImg title={title} img={img} link={link} />
+//         <Link  href={link} target='_blank'
+//              className='w-full inline-block cursor-pointer overflow-hidden rounded-lg'
+//         >
             
-        </Link>
+//         </Link>
        
-        <span className='text-primary font-semibold pl-4'>{date}</span>
-        </motion.li>
-    )
-}
+//         <span className='text-primary font-semibold pl-4'>{date}</span>
+//         </motion.li>
+//     )
+// }
 
+const FeaturedProject = ({type, title, summary, img, link, github}) => {
 
-const FeaturedArticles = ({img, title, time, summary,  link}) => {
     return(
-        <li className='relative col-span-1 w-full p-4 bg-light border border-solid border-dark rounded-2xl'>
-         <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark rounded-br-3xl'/>
+      <article className='w-full flex items-center justify-between relative rounded-br-2xl
+      rounded-3xl border border-solid border-dark bg-light shadow-2xl p-12 dark:bg-dark dark:border-light
+      '>
+          <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2.5rem] bg-dark rounded-br-3xl dark:bg-light'/>
+  
         <Link  href={link} target='_blank'
-             className='w-full inline-block cursor-pointer overflow-hidden rounded-lg'
+        className='w-1/2 cursor-pointer overflow-hidden rounded-lg'
         >
-            <FramerImage src={img} alt={title} className='w-full h-auto'
-                whileHover={{scale:1.05}}
-                transition={{duration:0.2}}
-            />
+          <FramerImage src={img} alt={title} className='w-full h-auto'
+             whileHover={{scale:1.05}}
+             transition={{duration:0.2}}
+          />
         </Link>
-        <Link  href={link} target='_blank'
-        >
-          <h2 className='my-2 mt-4 capitalize text-left text-2xl font-bold hover:underline'>{title}</h2>
-        </Link>
-        <p className='mb-2 text-sm'>{summary}</p>
-            <span className='text-primary font-semibold '>{time}</span>
-        </li>
+  
+        <div className='w-1/2 flex flex-col items-start justify-between pl-6'>
+          <span className='text-primary font-medium text-xl dark:text-primaryDark'>{type}</span>
+          <Link href={link} target='_blank' className='hover:underline underline-offset-2'>
+            <h2 className='my-2 w-full text-left text-4xl font-bold dark:text-light'>{title}</h2>
+          </Link>
+          <p className='my-2 font-medium text-dark dark:text-light'>{summary}</p>
+          <div className='mt-2 flex items-center'>
+          <Link href={link} target='_blank' className='ml-4 rounded-lg bg-dark text-light p-2 px-6 text-lg font-semibold 
+          dark:bg-light dark:text-dark '>
+            Visit Website
+          </Link>
+          </div>
+        </div>
+      </article>
     )
-}
+  }
+  
+
+// const FeaturedArticles = ({img, title, time, summary,  link}) => {
+//     return(
+//         <li className='relative col-span-1 w-full p-4 bg-light border border-solid border-dark rounded-2xl'>
+//          <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark rounded-br-3xl'/>
+//         <Link  href={link} target='_blank'
+//              className='w-full inline-block cursor-pointer overflow-hidden rounded-lg'
+//         >
+//             <FramerImage src={img} alt={title} className='w-full h-auto'
+//                 whileHover={{scale:1.05}}
+//                 transition={{duration:0.2}}
+//             />
+//         </Link>
+//         <Link  href={link} target='_blank'
+//         >
+//           <h2 className='my-2 mt-4 capitalize text-left text-2xl font-bold hover:underline'>{title}</h2>
+//         </Link>
+//         <p className='mb-2 text-sm'>{summary}</p>
+//             <span className='text-primary font-semibold '>{time}</span>
+//         </li>
+//     )
+// }
 
 
 
@@ -102,69 +140,30 @@ const articles = () => {
   return (
     <>
          <Head>
-            <title>Olyad Mulugeta| Articles</title>
+            <title>Olyad Mulugeta| Credentials</title>
             <meta name="description" content="About me" />
         </Head>
-        <main className='w-full mb-16 flex flex-col items-center justify-center overflow-hidden'>
-            <Layout className='pt-16 px-12'>
-                <AnimatedText text="Words Can Change The World! " className='mb-16'/>
+        <main className='w-full mb-16 flex flex-col items-center justify-center overflow-hidden dark:text-light'>
+            <Layout className='pt-16 px-0'>
+                <AnimatedText text="Hard Work Pays Off! " className='mb-16'/>
                 <ul className='grid grid-cols-2 gap-16'>
-                    <FeaturedArticles 
-                    title="Build A Custom Pagination Component In Reactjs From Scratch"
-                    summary="Learn how to build a custom pagination component in ReactJS from scratch. 
-                    Follow this step-by-step guide to integrate Pagination component in your ReactJS project.
-                    9 min read"
-                    time="9 min"
-                    link="/"
-                    img={project1}
-                    />
-                    <FeaturedArticles 
-                    title="Build A Custom Pagination Component In Reactjs From Scratch"
-                    summary="Learn how to build a custom pagination component in ReactJS from scratch. 
-                    Follow this step-by-step guide to integrate Pagination component in your ReactJS project.
-                    9 min read"
-                    time="9 min"
-                    link="/"
-                    img={article1}
-                    />
+                    <Education />
+
+                   
+                    <Experience />
+
                 </ul>
-                <h2 className='font-bold text-4xl w-full text-center my-16 mt-32'> All Articles</h2>
-                <ul>
-                    <Articles
-                        title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error Handling"
-                        date="March 22, 2023"
-                        link="/"
-                        img={article1}
-
-                    />
-                    <Articles
-                        title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error Handling"
-                        date="March 22, 2023"
-                        link="/"
-                        img={article2}
-
-                    />
-                    <Articles
-                        title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error Handling"
-                        date="March 22, 2023"
-                        link="/"
-                        img={article1}
-
-                    />
-                    <Articles
-                        title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error Handling"
-                        date="March 22, 2023"
-                        link="/"
-                        img={article2}
-
-                    />
-                    <Articles
-                        title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error Handling"
-                        date="March 22, 2023"
-                        link="/"
-                        img={article1}
-
-                    />
+                <h2 className='font-bold text-4xl w-full text-center my-16 mt-32'>Current Fous</h2>
+                <ul className='w-[95%] ml-10'>
+                <FeaturedProject
+                    title=" React Portfolio Website"
+                    link="/"
+                    summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
+                        page transitions, cool background effects, unique design and it is mobile responsive."
+                    type="Founder & Ceo"
+                    github="/"
+                    img={project1}
+                />     
                 </ul>
             </Layout>
         </main>

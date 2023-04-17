@@ -67,7 +67,7 @@ const Project = ({type, title, img, link, github}) => {
       </Link>
 
       <div className='w-full flex flex-col items-start justify-between mt-4'>
-        <span className='text-primary font-medium text-xl'>{type}</span>
+        <span className='text-primary dark:text-primaryDark font-medium text-xl'>{type}</span>
         <Link href={link} target='_blank' className='hover:underline underline-offset-2'>
           <h2 className='my-2 w-full text-left text-3xl font-bold'>{title}</h2>
         </Link>
