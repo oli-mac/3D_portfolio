@@ -102,7 +102,7 @@ const NavBar = () => {
                     <MoonIcon className={"fill-dark"} />
                 }
             </button>
-            {/* <Link href="/" target={'_blank'}>T</Link> */}
+        
         </nav>
         
         <div className='absolute left-[50%] top-2 translate-x-[-50%]'>
