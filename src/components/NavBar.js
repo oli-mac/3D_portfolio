@@ -9,7 +9,6 @@ import useThemeSwitcher from './hooks/useThemeSwitcher'
 
 const CustomLink = ({href, title, className=""}) => {
     const router = useRouter();
-    console.log(router)
     return(
         <Link href={href} className={`${className} relative group`}>
             {title}
@@ -72,7 +71,8 @@ const NavBar = () => {
 
   return (
     <div
-    className='w-full px-32 py-8 font-medium flex items-center justify-between dark:text-light relative'
+    className='w-full px-32 py-8 font-medium flex items-center justify-between dark:text-light relative  
+    z-10 lg:px-16 md:px-12 sm:px-8'
     >
 
         <button className=' flex-col justify-center items-center hidden lg:flex' onClick={handleClick}>
