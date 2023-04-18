@@ -15,6 +15,7 @@ import Education from '@/components/Education'
 
 
 import AnimatedText from '@/components/AnimatedText'
+import TransitionEffect from '@/components/TransitionEffect'
 
 const FramerImage = motion(Image);
 
@@ -152,6 +153,7 @@ const articles = () => {
             <title>Olyad Mulugeta| Credentials</title>
             <meta name="description" content="About me" />
         </Head>
+        <TransitionEffect />
         <main className='w-full mb-16 flex flex-col items-center justify-center overflow-hidden dark:text-light'>
             <Layout className='pt-16 px-0'>
                 <AnimatedText text="Hard Work Pays Off! " className='mb-16 lg:!text-7xl sm:mb-8 sm:!text-6xl xs:!text-4xl'/>

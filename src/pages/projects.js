@@ -11,6 +11,7 @@ import project2 from "../../public/images/projects/agency-website-cover-image.jp
 
 import Experience from '@/components/Experience'
 import Education from '@/components/Education'
+import TransitionEffect from '@/components/TransitionEffect'
 
 const FramerImage = motion(Image);
 
@@ -101,6 +102,7 @@ const projects = () => {
           <title>Olyad Mulugeta|My Projects</title>
           <meta name="description" content="About me" />
       </Head>
+      <TransitionEffect />
       <main className='w-full mb-16 flrx flex-col items-center justify-center dark:text-light'>
         <Layout className='pt-16 pb-20 px-12'>
           <AnimatedText text="Imagination Trumps Knowledge!" className='mb-16 lg:!text-7xl sm:mb-8 sm:!text-6xl xs:!text-4xl'/>
