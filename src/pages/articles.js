@@ -4,9 +4,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useMotionValue } from 'framer-motion'
-import project1 from "../../public/images/projects/portfolio-cover-image.jpg"
-import article1 from "../../public/images/articles/pagination component in reactjs.jpg"
-import article2 from "../../public/images/articles/create loading screen in react js.jpg"
+import project1 from "../../public/images/projects/Dagu.png"
+
 import { GithubIcon } from '@/components/Icon'
 import { LinkArrow } from '@/components/Icon'
 
@@ -167,12 +166,14 @@ const articles = () => {
                 <h2 className='font-bold text-4xl w-full text-center my-16 mt-32'>Current Fous</h2>
                 <ul className='w-[95%] ml-10 lg:ml-0 gap-24 xl:gap-x-16 lg:gap-x-8 md:gap-y-24 sm:gap-x-0'>
                 <FeaturedProject
-                    title=" React Portfolio Website"
-                    link="/"
-                    summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                        page transitions, cool background effects, unique design and it is mobile responsive."
+                    title=" DaguEthioED"
+                    link="http://www.DaguEthioED.com"
+                    summary="Our company envisions a future where the next generation is empowered 
+                    with information to shape the world of technology. We aim to host informative events that spark curiosity 
+                    and promote learning, featuring prominent speakers in the tech industry. Our slogan, Empowering the Next 
+                    Generation with Information, reflects our commitment to providing valuable insights and knowledge that 
+                    will enable young people to make informed decisions about their future in tech."
                     type="Founder & Ceo"
-                    github="/"
                     img={project1}
                 />     
                 </ul>

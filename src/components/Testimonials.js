@@ -1,8 +1,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import project1 from "../../public/images/projects/portfolio-cover-image.jpg"
-import project2 from "../../public/images/projects/agency-website-cover-image.jpg"
+
+// import project2 from "../../public/images/projects/agency-website-cover-image.jpg"======================
+
+import project1 from "../../public/images/profile/mulugeta.jpg"
+import project2 from "../../public/images/profile/Tarik.jpg"
+import project3 from "../../public/images/profile/miki.jpg"
+
+// import project2 from "../../public/images/projects/agency-website-cover-image.jpg"======================
 import { GithubIcon } from '@/components/Icon'
 import Image from 'next/image'
 
@@ -47,42 +53,27 @@ const Testimonials = () => {
                     
                     <Project
                         title="Robotics Researcher at Ritsumeikan University"
-                        summary="Remarkable Developer with exceptional dedication & adeptness in grasping intricate concepts effortlessly - a true asset to any team!"
+                        summary="Olyad Made my portfolio what a Remarkable Developer with exceptional dedication & and expertise  - a true asset to any team! #inspiration"
                         type="Mulugeta solomon"
                         img={project1}
                       />
                 </div>
                 <div className='col-span-6 sm:col-span-12'>
                 <Project
-                        title=" React Portfolio Website"
-                        summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                        "
-                        link="/"
-                        type="Featured Project"
-                        github="/"
-                        img={project1}
-                      />
-                </div>
-                <div className='col-span-6 sm:col-span-12'>
-                <Project
-                    title=" React Portfolio Website"
-                    summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                   "
-                    link="/"
-                    type="Featured Project"
-                    github="/"
-                    img={project2}
-                    />
-                </div>
-                <div className='col-span-6 sm:col-span-12'>
-                <Project
-                        title="Mulugeta solomon"
-                        summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                       "
-                        link="/"
-                        type="Mulugeta solomon"
-                        github="/"
+                        title=" Software engineer"
+                        summary="Effortlessly tackling intricate challenges, olyad's exceptional dedication make him a stellar software engineer and a great team mate #leader"
+                        type="Tarik Teshome"
                         img={project2}
+                      />
+                </div>
+                
+                <div className='col-span-6 sm:col-span-12'>
+                <Project
+                        title="Software engineer"
+                        summary="Our team is lucky to have olyad! His Expertise and Attitude make him a valuable software engineer. #teamplayer 
+                       "
+                        type="Michael Belachew"
+                        img={project3}
                     />
                 </div>
 

@@ -44,11 +44,17 @@ const Education = () => {
                     type="Bachelor Of Science In SoftWare Engineering"  
                     time="2016-2020 "
                     address= "Bahirdar Institute Of Technology (MIT)" 
-                    info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
-                    Intelligence."
+                    info="Relevant courses included programming languages, algorithms, 
+                    data structures, database systems, software design, and project management. These courses provided 
+                    me with the skills needed to develop software solutions that meet business requirements, are 
+                    scalable, and maintainable. In addition,courses in 
+                    user experience design, software testing, and software security, which are critical for producing 
+                    high-quality software that is secure and easy to use. i am 
+                    prepared for a range of careers in the software industry, including software developer, software
+                    engineer, and project manager."
                 
                 />
-               <Details 
+               {/* <Details 
                     type="Bachelor Of Science In SoftWare Engineering"  
                     time="2016-2020 "
                     address= "Bahirdar Institute Of Technology (MIT)" 
@@ -63,7 +69,7 @@ const Education = () => {
                     info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
                     Intelligence."
                 
-                />
+                /> */}
             </ul>
         </div>
 

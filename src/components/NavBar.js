@@ -125,7 +125,7 @@ const NavBar = () => {
                 whileHover={{y: -2}}
                 whileTap={{scale: 0.9}}
                 className='w-6 ml-3'
-                href="https://www.linkedin.com/in/olyad-mulugeta-79875621b/" 
+                href="https://www.facebook.com/profile.php?id=100008821115355" 
                 target={'_blank'}> 
                 <DribbbleIcon /> 
             </motion.a>

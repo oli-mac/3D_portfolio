@@ -6,8 +6,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { GithubIcon } from '@/components/Icon'
 import { motion } from 'framer-motion'
-import project1 from "../../public/images/projects/portfolio-cover-image.jpg"
-import project2 from "../../public/images/projects/agency-website-cover-image.jpg"
+
+// images=================================================
+
+import project1 from "../../public/images/projects/Project-Samaritan.jpg"
+import project2 from "../../public/images/projects/Enebla-c.png"
+import project3 from "../../public/images/projects/Enebla-u.png"
+import project4 from "../../public/images/projects/eho.JPG"
+import project5 from "../../public/images/projects/portfolio-cover-image.jpg"
+import project6 from "../../public/images/projects/Dagu.png"
+
+
+// images=================================================
 
 import Experience from '@/components/Experience'
 import Education from '@/components/Education'
@@ -60,7 +70,7 @@ const FeaturedProject = ({type, title, summary, img, link, github}) => {
   )
 }
 
-const Project = ({type, title, img, link, github}) => {
+const Project = ({type, title, img, link,summary, github}) => {
   return(
     <article className='w-full flex flex-col items-center justify-center
     rounded-2xl border border-solid border-dark bg-light shadow-2xl p-6 relative dark:bg-dark dark:border-light xs:p-4
@@ -81,6 +91,8 @@ const Project = ({type, title, img, link, github}) => {
         <Link href={link} target='_blank' className='hover:underline underline-offset-2'>
           <h2 className='my-2 w-full text-left text-3xl font-bold lg:text-2xl'>{title}</h2>
         </Link>
+        <p className='my-2 font-medium text-dark dark:text-light sm:text-sm'>{summary}</p>
+
         <div className='w-full mt-2 flex items-center justify-between'>
         <Link href={link} target='_blank' className='text-lg font-semibold underline md:text-base'>
           Visit 
@@ -110,67 +122,77 @@ const projects = () => {
           <div className='grid grid-cols-12 gap-24 gap-y-32 xl:gap-x-16 lg:gap-x-8 md:gap-y-24 sm:gap-x-0'>
             <div className='col-span-12'>
                 <FeaturedProject
-                title=" React Portfolio Website"
+                title="Samaritan"
                 link="/"
-                summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                    page transitions, cool background effects, unique design and it is mobile responsive."
+                summary="Medicine Description Mobile Application It uses artificial intelligence to identify the name of
+                 a medication from a picture, and the information about that medication is provided from a database of 
+                 medications maintained by the federal drug authority of America(openFDA) and delivers them in user-friendly 
+                 formats"
                 type="Featured Project"
-                github="/"
+                github="https://github.com/pegasuse-x/Project-Samaritan.git"
                 img={project1}
                 />
             </div>
             <div className='col-span-6 sm:col-span-12'>
                 
                 <Project
-                    title=" React Portfolio Website"
-                    summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                    page transitions, cool background effects, unique design and it is mobile responsive."
+                    title="Enebla Customer"
+                    summary="Enebla is mobile application that allows users to subscribe to a restaurant
+                     and order and pay for orders online. Our application aims to facilitate the interaction between 
+                     restaurants and their customers by allowing restaurants to open a virtual store on our platform 
+                     and by allowing customers to make orders and make payments through our platform directly to the 
+                     restaurant owner"
                     link="/"
-                    type="Featured Project"
-                    github="/"
-                    img={project1}
+                    type="Flutter Application"
+                    github="https://github.com/Zagwe/enebla_customer.git"
+                    img={project2}
                   />
             </div>
             <div className='col-span-6 sm:col-span-12'>
             <Project
-                    title=" React Portfolio Website"
-                    summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                    page transitions, cool background effects, unique design and it is mobile responsive."
+                    title=" Enebla User"
+                    summary="Enebla is mobile application that allows users to subscribe to a restaurant 
+                    and order and pay for orders online. Our application aims to facilitate the interaction between 
+                    restaurants and their customers by allowing restaurants to open a virtual store on our platform 
+                    and by allowing customers to make orders and make payments through our platform directly to the 
+                    restaurant owner"
                     link="/"
-                    type="Featured Project"
-                    github="/"
-                    img={project1}
+                    type="Flutter Application"
+                    github="https://github.com/Zagwe/enebla_user_app.git"
+                    img={project3}
                   />
             </div>
             <div className='col-span-12'>
             <FeaturedProject
-                title=" React Portfolio Website"
-                link="/"
+                title=" Echo Net Dynamic"
+                link="https://echonet.github.io/dynamic/"
+                summary="Implementation of the research Echo Net-Dynamic, an end-to-end deep learning approach for 
+                labeling the left ventricle and estimating the ejection fraction from input echocardiogram videos alone"
                 type="Featured Project"
-                github="/"
-                img={project2}
+                github="https://github.com/echonet/dynamic"
+                img={project4}
                 />
             </div>
             <div className='col-span-6 sm:col-span-12'>
             <Project
-                title=" React Portfolio Website"
+                title="React Portfolio Website"
                 summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
-                page transitions, cool background effects, unique design and it is mobile responsive."
+                    page transitions, cool background effects, unique design and it is mobile responsive."
                 link="/"
-                type="Featured Project"
-                github="/"
-                img={project2}
+                type="React Web Application"
+                github="https://github.com/oli-mac/3D_portfolio.git"
+                img={project5}
                 />
             </div>
             <div className='col-span-6 sm:col-span-12'>
             <Project
-                    title=" React Portfolio Website"
-                    summary="A professional portfolio website using React JS, Framer-motion, and Styled-components. It has smooth 
+                    title=" DaguEthioED X"
+                    summary="A professional Company website Built According to requirement . It has smooth 
                     page transitions, cool background effects, unique design and it is mobile responsive."
-                    link="/"
+                    link="https://DaguEthioED.tech"
                     type="Featured Project"
-                    github="/"
-                    img={project2}
+                    github="https://github.com/DaguEthioED/dagu_website.git"
+                    img={project6}
                 />
             </div>
           </div>
