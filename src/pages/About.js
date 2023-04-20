@@ -10,6 +10,7 @@ import Skills from '@/components/Skills'
 import Experience from '@/components/Experience'
 import Education from '@/components/Education'
 import TransitionEffect from '@/components/TransitionEffect'
+import Testimonials from '@/components/Testimonials'
 
 
 const AnimatedNumbers = ({value}) =>{
@@ -95,6 +96,7 @@ const About = () => {
                     </div>
                 </div>
                 <Skills />
+                <Testimonials />
                 {/* <Experience />
                 <Education /> */}
             </Layout>
