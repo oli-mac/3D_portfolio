@@ -70,7 +70,7 @@ const Testimonials = () => {
                 <div className='col-span-6 sm:col-span-12'>
                 <Project
                         title="Software engineer"
-                        summary="Our team is lucky to have olyad! His Expertise and Attitude make him a valuable software engineer. #teamplayer 
+                        summary="Our team is lucky to have olyad! His Expertise, dedication and Attitude make him a valuable software engineer. #teamplayer 
                        "
                         type="Michael Belachew"
                         img={project3}
