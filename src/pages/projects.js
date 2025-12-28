@@ -12,7 +12,7 @@ import { motion } from 'framer-motion'
 import project1 from "../../public/images/projects/Project-Samaritan.jpg"
 import project2 from "../../public/images/projects/Enebla-c.png"
 import project3 from "../../public/images/projects/Enebla-u.png"
-import project4 from "../../public/images/projects/eho.JPG"
+import project4 from "../../public/images/projects/ehocardio.jpg"
 import project5 from "../../public/images/projects/portfolio-cover-image.jpg"
 import project6 from "../../public/images/projects/Dagu.png"
 
