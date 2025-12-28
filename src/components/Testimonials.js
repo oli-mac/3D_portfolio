@@ -5,7 +5,7 @@ import Link from 'next/link'
 // import project2 from "../../public/images/projects/agency-website-cover-image.jpg"======================
 
 import project1 from "../../public/images/profile/mulugeta.jpg"
-import project2 from "../../public/images/profile/Tarik.jpg"
+import project2 from "../../public/images/profile/tarik.jpg"
 import project3 from "../../public/images/profile/miki.jpg"
 
 // import project2 from "../../public/images/projects/agency-website-cover-image.jpg"======================
