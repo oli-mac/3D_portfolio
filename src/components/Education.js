@@ -21,7 +21,7 @@ const Details = ({type, time, address, info}) =>{
     </li>
 }
 
-const Education = () => {
+const Education = ({ heading, items = [] }) => {
 
     const ref = useRef(null);
     const {scrollYProgress} = useScroll(
@@ -33,43 +33,16 @@ const Education = () => {
 
   return (
     <div className='my-8'>
-        <h2 className='font-bold text-4xl mb-8 w-full text-center dark:text-light md:text-6xl xs:text-4xl md:mb-16'>Education</h2>
+        <h2 className='font-bold text-4xl mb-8 w-full text-center dark:text-light md:text-6xl xs:text-4xl md:mb-16'>{heading}</h2>
         
         <div ref={ref} className='w-[100%] mx-auto relative'>
             <motion.div style={{scaleY: scrollYProgress}} className='absolute left-9 top-0 w-[4px] h-full bg-dark origin-top dark:bg-light
              md:w-[2px] md:left-[30px] xs:left-[20px]'/>
 
             <ul className='w-full flex flex-col items-start justify-between ml-10 xs:ml-4'>
-                <Details 
-                    type="Bachelor Of Science In SoftWare Engineering"  
-                    time="2016-2020 "
-                    address= "Bahirdar Institute Of Technology (MIT)" 
-                    info="Relevant courses included programming languages, algorithms, 
-                    data structures, database systems, software design, and project management. These courses provided 
-                    me with the skills needed to develop software solutions that meet business requirements, are 
-                    scalable, and maintainable. In addition,courses in 
-                    user experience design, software testing, and software security, which are critical for producing 
-                    high-quality software that is secure and easy to use. i am 
-                    prepared for a range of careers in the software industry, including software developer, software
-                    engineer, and project manager."
-                
-                />
-               {/* <Details 
-                    type="Bachelor Of Science In SoftWare Engineering"  
-                    time="2016-2020 "
-                    address= "Bahirdar Institute Of Technology (MIT)" 
-                    info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
-                    Intelligence."
-                
-                />
-                <Details 
-                    type="Bachelor Of Science In SoftWare Engineering"  
-                    time="2016-2020 "
-                    address= "Bahirdar Institute Of Technology (MIT)" 
-                    info="Relevant courses included Data Structures and Algorithms, Computer Systems Engineering, and Artificial 
-                    Intelligence."
-                
-                /> */}
+                {items.map((item) => (
+                    <Details key={`${item.type}-${item.time}`} {...item} />
+                ))}
             </ul>
         </div>
 

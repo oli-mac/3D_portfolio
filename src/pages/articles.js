@@ -1,186 +1,60 @@
-import React, { useRef } from 'react'
-import Layout from '@/components/Layout'
-import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
-import { motion, useMotionValue } from 'framer-motion'
-import project1 from "../../public/images/projects/Dagu.png"
+import React from "react";
+import Layout from "@/components/Layout";
+import Experience from "@/components/Experience";
+import Education from "@/components/Education";
+import AnimatedText from "@/components/AnimatedText";
+import TransitionEffect from "@/components/TransitionEffect";
+import SEO from "@/components/SEO";
 
-import { GithubIcon } from '@/components/Icon'
-import { LinkArrow } from '@/components/Icon'
-
-import Experience from '@/components/Experience'
-import Education from '@/components/Education'
-
-
-import AnimatedText from '@/components/AnimatedText'
-import TransitionEffect from '@/components/TransitionEffect'
-
-const FramerImage = motion(Image);
-
-const MovingImg = ({img, title,  link}) => {
-
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const imgRef = useRef(null);
-
-    function handelMouse(event) {
-        imgRef.current.style.display ="inline-block";
-        x.set(event.pageX);
-        y.set(-10);
-        
-    }
-    function handelMouseLeave(event){
-        imgRef.current.style.display ="none";
-        x.set(0);
-        y.set(0);
-    }
-
-    return(
-        <Link  href={link} target='_blank'
-        
-        onMouseMove={handelMouse}
-        onMouseLeave={handelMouseLeave}
+const FocusCard = ({ page }) => (
+  <article className="relative mx-auto w-[95%] rounded-3xl rounded-br-2xl border border-solid border-dark bg-light p-12 shadow-2xl dark:border-light dark:bg-dark lg:p-8 xs:rounded-2xl xs:rounded-br-3xl xs:p-4">
+    <div className="absolute -right-3 top-0 -z-10 h-[103%] w-[101%] rounded-[2.5rem] rounded-br-3xl bg-dark dark:bg-light xs:-right-2 xs:h-[102%] xs:w-full xs:rounded-l-[1.5rem]" />
+    <span className="text-xl font-medium text-primary dark:text-primaryDark xs:text-base">{page.focusRole}</span>
+    <h2 className="my-3 text-4xl font-bold dark:text-light sm:text-3xl xs:text-2xl">{page.focusTitle}</h2>
+    <p className="font-semibold text-dark/60 dark:text-light/60">{page.focusMeta}</p>
+    <p className="mt-5 font-medium text-dark dark:text-light">{page.focusBody}</p>
+    <div className="mt-6 flex flex-wrap gap-4">
+      {page.focusPrimaryCtaHref ? (
+        <a
+          href={page.focusPrimaryCtaHref}
+          className="rounded-lg bg-dark px-6 py-2 text-lg font-semibold text-light dark:bg-light dark:text-dark sm:text-base"
         >
-          <h2 className='capitalize text-xl font-semibold hover:underline'>{title}</h2>
-            <FramerImage 
-                style={{ x:x, y:y }}
-                initial={{opacity:0}}
-                whileInView={{opacity:1, transition:{duration:0.2}}}
-            
-            ref={imgRef} src={img} alt={title} className='z-10 w-96 h-auto hidden absolute rounded-lg'/>
+          {page.focusPrimaryCtaLabel}
+        </a>
+      ) : null}
+      {page.focusSecondaryCtaHref ? (
+        <a href={page.focusSecondaryCtaHref} className="text-lg font-semibold underline md:text-base">
+          {page.focusSecondaryCtaLabel}
+        </a>
+      ) : null}
+    </div>
+  </article>
+);
 
-        </Link>
-    )
-}
-
-// const Articles = ({img, title, date,  link}) => {
-//     return(
-//         <motion.li 
-//         initial={{y:200}}
-//         whileInView={{y:0, transition:{duration:0.5, ease:"easeInOut"}}}
-//         viewport={{once: true}}
-//         className='relative w-full p-4 py-6 my-4 flex rounded-xl items-center justify-between bg-light text-dark
-//         first:mt-0 border border-solid border-dark border-r-4 border-b-4'
-//         >
-//          <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark rounded-br-3xl
-//          '/>
-//         <MovingImg title={title} img={img} link={link} />
-//         <Link  href={link} target='_blank'
-//              className='w-full inline-block cursor-pointer overflow-hidden rounded-lg'
-//         >
-            
-//         </Link>
-       
-//         <span className='text-primary font-semibold pl-4'>{date}</span>
-//         </motion.li>
-//     )
-// }
-
-const FeaturedProject = ({type, title, summary, img, link, github}) => {
-
-    return(
-      <article className='w-full flex items-center justify-between relative rounded-br-2xl
-      rounded-3xl border border-solid border-dark bg-light shadow-2xl p-12 dark:bg-dark dark:border-light
-      lg:flex-col lg:p-8 xs:rounded-2xl xs:rounded-br-3xl xs:p-4
-
-      '>
-          <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2.5rem] bg-dark rounded-br-3xl dark:bg-light
-        xs:-right-2 xs:h-[102%] xs:w-full xs:rounded-l-[1.5rem]
-        '/>
-  
-        <Link  href={link} target='_blank'
-        className='w-1/2 cursor-pointer overflow-hidden rounded-lg lg:w-full'
-        >
-          <FramerImage src={img} alt={title} className='w-full h-auto'
-             whileHover={{scale:1.05}}
-             transition={{duration:0.2}}
-             priority
-              sizes='(max-width:768px) 100vw,
-              (max-width:1200px) 50vw,50vw
-              '
-          />
-        </Link>
-  
-        <div className='w-1/2 flex flex-col items-start justify-between pl-6 lg:w-full lg:pl-0 lg:pt-6'>
-          <span className='text-primary font-medium text-xl dark:text-primaryDark xs:text-base'>{type}</span>
-          <Link href={link} target='_blank' className='hover:underline underline-offset-2'>
-            <h2 className='my-2 w-full text-left text-4xl font-bold dark:text-light sm:text-sm'>{title}</h2>
-          </Link>
-          <p className='my-2 font-medium text-dark dark:text-light'>{summary}</p>
-          <div className='mt-2 flex items-center'>
-          <Link href={link} target='_blank' className='ml-4 rounded-lg bg-dark text-light p-2 px-6 text-lg font-semibold 
-          dark:bg-light dark:text-dark 
-          sm:px-4 sm:text-base'>
-            Visit Website
-          </Link>
-          </div>
-        </div>
-      </article>
-    )
-  }
-  
-
-// const FeaturedArticles = ({img, title, time, summary,  link}) => {
-//     return(
-//         <li className='relative col-span-1 w-full p-4 bg-light border border-solid border-dark rounded-2xl'>
-//          <div className='absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark rounded-br-3xl'/>
-//         <Link  href={link} target='_blank'
-//              className='w-full inline-block cursor-pointer overflow-hidden rounded-lg'
-//         >
-//             <FramerImage src={img} alt={title} className='w-full h-auto'
-//                 whileHover={{scale:1.05}}
-//                 transition={{duration:0.2}}
-//             />
-//         </Link>
-//         <Link  href={link} target='_blank'
-//         >
-//           <h2 className='my-2 mt-4 capitalize text-left text-2xl font-bold hover:underline'>{title}</h2>
-//         </Link>
-//         <p className='mb-2 text-sm'>{summary}</p>
-//             <span className='text-primary font-semibold '>{time}</span>
-//         </li>
-//     )
-// }
-
-
-
-const articles = () => {
+const Articles = ({ page, siteSettings }) => {
   return (
     <>
-         <Head>
-            <title>Olyad Mulugeta| Credentials</title>
-            <meta name="description" content="About me" />
-        </Head>
-        <TransitionEffect />
-        <main className='w-full mb-16 flex flex-col items-center justify-center overflow-hidden dark:text-light'>
-            <Layout className='pt-16 px-0'>
-                <AnimatedText text="Hard Work Pays Off! " className='mb-16 lg:!text-7xl sm:mb-8 sm:!text-6xl xs:!text-4xl'/>
-                <ul className='grid grid-cols-2 gap-16 lg:flex lg:flex-col'>
-                    <Education />
-
-                   
-                    <Experience />
-
-                </ul>
-                <h2 className='font-bold text-4xl w-full text-center my-16 mt-32'>Current Fous</h2>
-                <ul className='w-[95%] ml-10 lg:ml-0 gap-24 xl:gap-x-16 lg:gap-x-8 md:gap-y-24 sm:gap-x-0'>
-                <FeaturedProject
-                    title=" DaguEthioED"
-                    link="http://www.DaguEthioED.com"
-                    summary="Our company envisions a future where the next generation is empowered 
-                    with information to shape the world of technology. We aim to host informative events that spark curiosity 
-                    and promote learning, featuring prominent speakers in the tech industry. Our slogan, Empowering the Next 
-                    Generation with Information, reflects our commitment to providing valuable insights and knowledge that 
-                    will enable young people to make informed decisions about their future in tech."
-                    type="Founder & Ceo"
-                    img={project1}
-                />     
-                </ul>
-            </Layout>
-        </main>
+      <SEO
+        title={page.seo?.title || siteSettings.seo?.title}
+        description={page.seo?.description || siteSettings.seo?.description}
+      />
+      <TransitionEffect />
+      <main className="w-full mb-16 flex flex-col items-center justify-center overflow-hidden dark:text-light">
+        <Layout className="pt-16 px-0">
+          <AnimatedText
+            text={page.headline}
+            className="mb-16 lg:!text-7xl sm:mb-8 sm:!text-6xl xs:!text-4xl"
+          />
+          <ul className="grid grid-cols-2 gap-16 lg:flex lg:flex-col">
+            <Education heading={page.educationHeading} items={page.education} />
+            <Experience heading={page.experienceHeading} items={page.experience} />
+          </ul>
+          <h2 className="font-bold text-4xl w-full text-center my-16 mt-32">{page.focusHeading}</h2>
+          <FocusCard page={page} />
+        </Layout>
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default articles
+export default Articles;

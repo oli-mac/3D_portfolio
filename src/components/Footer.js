@@ -1,21 +1,20 @@
 import React from 'react'
 import Layout from './Layout'
-import Link from 'next/link'
 
-const Footer = () => {
+const Footer = ({ settings }) => {
   return (
     <footer className='
-        w-full border-t-2 border-solid border-dark font-medium text-lg dark:text-light dark:border-light sm:text-base
+        mt-auto w-full border-t-2 border-solid border-dark font-medium text-lg dark:text-light dark:border-light sm:text-base
     '>
         <Layout className='py-8 px-12 flex items-center justify-between lg:flex-col lg:py-6'>
-            <span>{new Date().getFullYear()} &copy; All Rights Reserved.</span>
+            <span>{settings.footerCopyrightText}</span>
 
             <div className='flex items-center lg:py-2'>
-                Made with <span className='text-primary dark:text-primaryDark text-2xl px-1'> &#9825;</span> by &nbsp;
-                <Link href="https://olyadmulugeta.live" className='underline underline-offset-2'>
-                    Olyad Mulugeta</Link>
+                {settings.footerCreditText}<span className='text-primary dark:text-primaryDark text-2xl px-1'> &#9825;</span> by &nbsp;
+                <a href={settings.sayHelloHref} className='underline underline-offset-2'>
+                    {settings.name}</a>
             </div>
-            <Link href="https://olyadmulugeta.live" className='underline underline-offset-2'>Say Hello</Link>
+            <a href={settings.sayHelloHref} className='underline underline-offset-2'>{settings.sayHelloLabel}</a>
         </Layout>
     </footer>
 

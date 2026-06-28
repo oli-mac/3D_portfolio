@@ -1,0 +1,10 @@
+{
+  "name": "olyad-portfolio-studio",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "@sanity/vision": "^3.99.0",
+    "sanity": "^3.99.0",
+    "styled-components": "^6.1.15"
+  }
+}
