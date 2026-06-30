@@ -234,6 +234,86 @@ const projects = [
 
 const blogPosts = [
   {
+    slug: "ethiopia-food-composition-database",
+    title: "Building Ethiopia's Food Composition Database: How I Turned a 1998 PDF Into a Real Web App",
+    date: "June 2026",
+    readTime: "10 min read",
+    category: "Data Engineering",
+    excerpt:
+      "How I helped turn Ethiopia's food composition tables from scattered PDFs and spreadsheets into a searchable, governed, auditable national data platform.",
+    sections: [
+      {
+        heading: "Introduction",
+        paragraphs: [
+          "Here's a fun fact: Ethiopia's last set of food composition tables came out in pieces between 1969 and 1998. If you wanted to know how much iron is in teff, your best bet was tracking down a decades-old printed table - assuming you could find one, and assuming it hadn't already been superseded by newer lab analysis sitting in someone's filing cabinet.",
+          "That's the gap this project was built to close. I worked as the full-stack engineer on the backend API and the entire admin-side frontend, and I also wore the project manager hat - which meant I got to experience this project from \"what does the client actually need\" all the way down to \"why is this Excel import skipping rows it shouldn't.\" The result is the Food Composition Database (FCDB), now live as the platform behind Ethiopia's newly launched Ethiopian Food Composition Table (EFCT), built for the Ethiopian Public Health Institute (EPHI) with technical support from the FAO and funding from the Gates Foundation.",
+        ],
+      },
+      {
+        heading: "The Problem",
+        paragraphs: [
+          "Before this system existed, Ethiopia's food composition data lived the way a lot of important institutional data lives: in spreadsheets. Nutritionists maintained values in Excel files, emailed them around for review, and an admin would eventually copy-paste or manually trigger an import into whatever legacy system was in use. There was no centralized validation, so errors got caught - if they got caught - by a human squinting at a spreadsheet.",
+          "This wasn't just inconvenient. It was a real bottleneck for an entire ecosystem of people who needed this data: researchers, dietitians, food standard bodies, food processors, policymakers, and consumer protection authorities. None of them could search anything. None of them could trust that two copies of \"the data\" hadn't quietly diverged. And EPHI itself had no good way to track who was actually using the data or why, which mattered for reporting back to funders and shaping future research priorities.",
+        ],
+      },
+      {
+        heading: "The Idea",
+        paragraphs: [
+          "The idea, explained the way I'd explain it to another engineer over coffee: build a web-based database that lets the public search and view Ethiopian food composition data without needing an account, while giving EPHI's admins a proper tool - bulk Excel import with real validation, full CRUD on food and nutrient records, export back to Excel, and a super-admin layer that manages who gets to touch the data at all. Underneath that simple pitch is the part that actually matters: every write operation needs to be role-checked, every import needs to survive bad rows without losing good ones, and every change needs to be traceable, because this is the kind of dataset that ends up cited in national nutrition policy.",
+        ],
+      },
+      {
+        heading: "How the System Works",
+        paragraphs: [
+          "The stack is Python on the backend with a REST API, React.js for the frontend, PostgreSQL as the system of record, and Elasticsearch layered in for the search experience - type-ahead, symbol lookups, and filtering by food group needed to feel fast, and that's not really Postgres's home turf.",
+          "There are three roles in the system: Public users, Admins, and a Super Admin, and the architecture is built around keeping their capabilities cleanly separated. Public users hit the API for read-only search and detail views - no login required, no write access, full stop. Admins authenticate and get access to CRUD operations on food and nutrient entities, plus the bulk import and export tooling. The Super Admin sits above that, managing Admin accounts, resetting passwords, and reviewing audit logs.",
+          "The import flow is where most of the actual engineering lives. An admin uploads an Excel file, the system reads the header and shows a column-mapping preview, and once confirmed, the job gets enqueued rather than processed synchronously in the request. The worker processes rows one at a time: validating required fields, checking a deduplication key, and either inserting/updating the record or logging a rejection - without ever rolling back the whole batch because one row was malformed.",
+          "Every state-changing action - CRUD edits, account creation, password resets, import completions - writes to an audit log, and audit retention itself follows a configurable policy with automatic archival.",
+        ],
+      },
+      {
+        heading: "Key Features",
+        paragraphs: [
+          "Public search and nutrient detail pages. Type-ahead search by food name, scientific name, or English name, with category filtering, turns \"flip through a table\" into \"type three letters and get an answer.\"",
+          "Role-based access control, enforced twice. Permissions aren't just hidden in the UI - every state-changing API endpoint independently validates the caller's role and returns a 403 for anything unauthorized.",
+          "Row-atomic bulk import. Making each row independently validated and committed meant a typo in row 4,000 of 5,000 didn't cost anyone the other 4,999 correct rows.",
+          "Audit logging on everything that changes state. For a national dataset that other institutions cite, \"who changed this and when\" isn't a nice-to-have.",
+          "Excel export, gated by role. Public users get viewing, not downloading - only admins with permission can pull data out in bulk.",
+        ],
+      },
+      {
+        heading: "Interesting Engineering Decisions",
+        paragraphs: [
+          "The decision to make import processing row-atomic instead of all-or-nothing was probably the single most consequential call on the backend. Real-world spreadsheets always have a few rows with a missing unit or a stray character in a numeric field. Designing for partial success, with per-row error logging and a structured rejection report, meant admins could fix the actual broken rows instead of guessing which one blew up the whole job.",
+          "Splitting Postgres and Elasticsearch was another deliberate trade-off. Postgres gives you ACID guarantees and relational integrity for the actual food/nutrient/user data; Elasticsearch gives you the fuzzy, fast, autocomplete-style search public users expect. Keeping the source of truth in one place and treating search as a derived, rebuildable index is a pattern that scales a lot better than trying to make one database good at both jobs.",
+          "Enforcing RBAC at the API layer, not just the UI, was non-negotiable given who'd eventually rely on this data. National nutrition policy isn't the place to discover your access control was cosmetic.",
+        ],
+      },
+      {
+        heading: "The Bugs, The Pain, and The Character Development",
+        paragraphs: [
+          "Building the import pipeline meant living with the database's opinions about what counts as duplicate data for a while. Deduplication keys sound simple until you're deciding whether two records with the same food name but different sources should be treated as the same entity or not.",
+          "Background job processing also meant accepting that \"it works on my machine, synchronously, with five test rows\" tells you almost nothing about how a worker behaves under a real file with messy, human-entered data. The bug usually showed up not in the happy path, but in row 3,847 of a real EPHI spreadsheet that had a stray comma where a number should be.",
+          "And role-based access control, as it always does, generated its fair share of \"wait, why can this admin see that button\" moments during testing.",
+        ],
+      },
+      {
+        heading: "What I Learned",
+        paragraphs: [
+          "This project sharpened a few things I now treat as defaults rather than nice-to-haves. Designing for partial failure - rows, jobs, batches - beats designing for an idealized all-or-nothing world, because real data is never clean. Authorization needs to live in the API, not just the UI, every time. And audit logging is the thing that turns \"trust me\" into \"here's the record.\"",
+          "Managing the project at the same time as building it also taught me that requirements documents aren't busywork. Writing out business rules like row-atomic import and audit retention policy explicitly, before writing code, saved a lot of \"wait, what's supposed to happen here\" conversations later.",
+        ],
+      },
+      {
+        heading: "Final Thoughts",
+        paragraphs: [
+          "This wasn't a flashy project in the sense of new frameworks or exotic infrastructure - it's a fairly classic full-stack system: Python API, React admin dashboard, Postgres, Elasticsearch, RBAC, background jobs, audit logs. What makes it worth showcasing is what it replaced and who it's for.",
+          "A national institute's nutrition data went from scattered PDFs and email attachments to a searchable, governed, auditable platform that researchers, dietitians, and policymakers across Ethiopia can actually use. Building and managing that, end to end, on both the API and the admin frontend, is the kind of project that demonstrates not just \"I can write code,\" but \"I can think through what a system needs to be trustworthy enough for other people to build decisions on top of.\"",
+        ],
+      },
+    ],
+  },
+  {
     slug: "interpretable-ai-rhd-screening",
     title: "Building interpretable AI for rheumatic heart disease screening",
     date: "May 2026",
@@ -573,11 +653,17 @@ const run = async () => {
       _type: "blogPost",
       ...post,
       slug: { _type: "slug", current: post.slug },
-      sections: post.sections.map((section, sectionIndex) => ({
-        _type: "textSection",
-        ...section,
-        sortOrder: sectionIndex + 1,
-      })),
+      image: post.image ? await imageField(post.image[0], post.image[1]) : undefined,
+      sections: await Promise.all(
+        post.sections.map(async (section, sectionIndex) => ({
+          _type: "textSection",
+          ...section,
+          images: section.images
+            ? await Promise.all(section.images.map((image) => imageField(image[0], image[1])))
+            : undefined,
+          sortOrder: sectionIndex + 1,
+        }))
+      ),
       sortOrder: index + 1,
       seo: {
         _type: "seo",

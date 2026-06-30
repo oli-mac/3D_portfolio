@@ -78,9 +78,35 @@ const textSection = {
   type: "object",
   fields: [
     { name: "heading", title: "Heading", type: "string", validation: (Rule) => Rule.required() },
-    { name: "body", title: "Body", type: "text", rows: 4, validation: (Rule) => Rule.required() },
+    {
+      name: "body",
+      title: "Body",
+      type: "text",
+      rows: 5,
+      description: "Legacy single-body field. Use Paragraphs for new long-form posts.",
+    },
+    {
+      name: "paragraphs",
+      title: "Paragraphs",
+      type: "array",
+      of: [{ type: "text", rows: 4 }],
+      description: "Add one or more paragraphs for this section.",
+    },
+    {
+      name: "images",
+      title: "Optional Section Images",
+      type: "array",
+      of: [{ type: "imageWithAlt" }],
+      description: "Upload screenshots, diagrams, or supporting images for this section.",
+    },
     { name: "sortOrder", title: "Sort Order", type: "number" },
   ],
+  preview: {
+    select: {
+      title: "heading",
+      media: "images.0",
+    },
+  },
 };
 
 const siteSettings = {

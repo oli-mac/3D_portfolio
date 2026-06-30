@@ -6,6 +6,8 @@ import TransitionEffect from "@/components/TransitionEffect";
 import SEO from "@/components/SEO";
 import SanityImage from "@/components/SanityImage";
 
+const toArray = (value) => (Array.isArray(value) ? value.filter(Boolean) : []);
+
 const ProjectActions = ({ link, github, actionLabel }) => {
   if (!link && !github) return null;
 
@@ -29,18 +31,24 @@ const ProjectActions = ({ link, github, actionLabel }) => {
   );
 };
 
-const TagList = ({ tags = [] }) => (
-  <div className="mt-4 flex flex-wrap gap-2">
-    {tags.map((tag) => (
-      <span
-        key={tag}
-        className="rounded-full border border-solid border-dark/10 bg-light/20 px-2.5 py-1 text-xs font-semibold text-dark/70 backdrop-blur-md dark:border-light/10 dark:bg-light/[0.04] dark:text-light/70"
-      >
-        {tag}
-      </span>
-    ))}
-  </div>
-);
+const TagList = ({ tags }) => {
+  const safeTags = toArray(tags);
+
+  if (!safeTags.length) return null;
+
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {safeTags.map((tag, index) => (
+        <span
+          key={`${tag}-${index}`}
+          className="rounded-full border border-solid border-dark/10 bg-light/20 px-2.5 py-1 text-xs font-semibold text-dark/70 backdrop-blur-md dark:border-light/10 dark:bg-light/[0.04] dark:text-light/70"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+};
 
 const CATEGORY_ALL = "All Projects";
 const GENERAL_CATEGORIES = ["ML / AI", "Software", "Data", "Other"];
@@ -51,8 +59,8 @@ const getProjectCategory = (project) => {
     project.type,
     project.period,
     project.summary,
-    ...(project.details || []),
-    ...(project.tags || []),
+    ...toArray(project.details),
+    ...toArray(project.tags),
   ]
     .filter(Boolean)
     .join(" ")
@@ -164,34 +172,40 @@ const ProjectImage = ({ project, className = "" }) => {
   );
 };
 
-const Project = ({ project, actionLabel }) => (
-  <article className="relative flex h-full min-h-[640px] w-full flex-col items-center justify-start overflow-hidden rounded-2xl border border-solid border-light/45 bg-light/25 p-4 shadow-[0_18px_45px_rgba(27,27,27,0.07)] backdrop-blur-2xl dark:border-light/10 dark:bg-dark/20 dark:shadow-[0_18px_45px_rgba(0,0,0,0.24)] xs:min-h-0">
-    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/35 via-white/[0.08] to-transparent dark:from-white/[0.08] dark:via-white/[0.03]" />
-    <ProjectImage project={project} className="relative h-44 w-full lg:h-52 md:h-64 sm:h-56" />
+const Project = ({ project, actionLabel }) => {
+  const details = toArray(project.details);
 
-    <div className="relative mt-4 flex w-full flex-1 flex-col items-start justify-between">
-      <div className="flex w-full flex-1 flex-col">
-        <span className="text-base font-medium text-primary dark:text-primaryDark md:text-base">
-          {project.type}
-        </span>
-        <h2 className="my-2 min-h-[64px] w-full text-left text-xl font-bold leading-tight lg:min-h-0 md:text-2xl">
-          {project.title}
-        </h2>
-        <span className="min-h-[44px] text-sm font-semibold text-dark/60 dark:text-light/60 lg:min-h-0">
-          {project.period}
-        </span>
-        <p className="my-3 text-sm font-medium text-dark/90 dark:text-light/90">{project.summary}</p>
-        <ul className="list-disc space-y-2 pl-5 text-sm font-medium text-dark/70 dark:text-light/70">
-          {project.details.map((detail) => (
-            <li key={detail}>{detail}</li>
-          ))}
-        </ul>
-        <TagList tags={project.tags} />
+  return (
+    <article className="relative flex h-full min-h-[640px] w-full flex-col items-center justify-start overflow-hidden rounded-2xl border border-solid border-light/45 bg-light/25 p-4 shadow-[0_18px_45px_rgba(27,27,27,0.07)] backdrop-blur-2xl dark:border-light/10 dark:bg-dark/20 dark:shadow-[0_18px_45px_rgba(0,0,0,0.24)] xs:min-h-0">
+      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/35 via-white/[0.08] to-transparent dark:from-white/[0.08] dark:via-white/[0.03]" />
+      <ProjectImage project={project} className="relative h-44 w-full lg:h-52 md:h-64 sm:h-56" />
+
+      <div className="relative mt-4 flex w-full flex-1 flex-col items-start justify-between">
+        <div className="flex w-full flex-1 flex-col">
+          <span className="text-base font-medium text-primary dark:text-primaryDark md:text-base">
+            {project.type}
+          </span>
+          <h2 className="my-2 min-h-[64px] w-full text-left text-xl font-bold leading-tight lg:min-h-0 md:text-2xl">
+            {project.title}
+          </h2>
+          <span className="min-h-[44px] text-sm font-semibold text-dark/60 dark:text-light/60 lg:min-h-0">
+            {project.period}
+          </span>
+          <p className="my-3 text-sm font-medium text-dark/90 dark:text-light/90">{project.summary}</p>
+          {details.length ? (
+            <ul className="list-disc space-y-2 pl-5 text-sm font-medium text-dark/70 dark:text-light/70">
+              {details.map((detail, index) => (
+                <li key={`${detail}-${index}`}>{detail}</li>
+              ))}
+            </ul>
+          ) : null}
+          <TagList tags={project.tags} />
+        </div>
+        <ProjectActions link={project.link} github={project.github} actionLabel={actionLabel} />
       </div>
-      <ProjectActions link={project.link} github={project.github} actionLabel={actionLabel} />
-    </div>
-  </article>
-);
+    </article>
+  );
+};
 
 const Projects = ({ page, projects = [], siteSettings }) => {
   const categories = useMemo(() => {

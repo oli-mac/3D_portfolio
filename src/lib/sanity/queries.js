@@ -115,7 +115,9 @@ export const portfolioQuery = `{
     image ${imageFields},
     sections[] | order(sortOrder asc) {
       heading,
-      body
+      body,
+      paragraphs,
+      images[] ${imageFields}
     },
     seo ${seoFields}
   },

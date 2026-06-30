@@ -3,6 +3,13 @@ import Layout from "@/components/Layout";
 import AnimatedText from "@/components/AnimatedText";
 import TransitionEffect from "@/components/TransitionEffect";
 import SEO from "@/components/SEO";
+import SanityImage from "@/components/SanityImage";
+
+const getSectionParagraphs = (section) => {
+  if (section.paragraphs?.length) return section.paragraphs;
+  if (!section.body) return [];
+  return section.body.split(/\n{2,}/).filter(Boolean);
+};
 
 const BlogPost = ({ post, page, siteSettings }) => {
   return (
@@ -28,19 +35,47 @@ const BlogPost = ({ post, page, siteSettings }) => {
               <p className="mt-8 text-xl font-medium leading-relaxed text-dark/75 dark:text-light/75 md:text-lg">
                 {post.excerpt}
               </p>
+              {post.image && (
+                <SanityImage
+                  image={post.image}
+                  width={1400}
+                  className="mt-10 aspect-[16/9] w-full rounded-lg border border-solid border-dark/10 object-cover shadow-xl dark:border-light/10"
+                />
+              )}
             </div>
 
-            <div className="mt-12 space-y-10">
+            <div className="mt-14 space-y-14">
               {post.sections.map((section) => (
-                <section
-                  key={section.heading}
-                  className="relative rounded-2xl border border-solid border-dark bg-light p-8 shadow-2xl dark:border-light dark:bg-dark xs:p-5"
-                >
-                  <div className="absolute -right-3 top-0 -z-10 h-[103%] w-[101%] rounded-[2rem] rounded-br-3xl bg-dark dark:bg-light md:-right-2 md:w-[102%] xs:h-[102%] xs:rounded-[1.5rem]" />
-                  <h2 className="text-3xl font-bold lg:text-2xl">{section.heading}</h2>
-                  <p className="mt-4 text-lg font-medium leading-relaxed text-dark/75 dark:text-light/75 md:text-base">
-                    {section.body}
-                  </p>
+                <section key={section.heading} className="border-t border-solid border-dark/10 pt-10 dark:border-light/10">
+                  <h2 className="text-3xl font-bold leading-tight lg:text-2xl">{section.heading}</h2>
+                  <div className="mt-5 space-y-5">
+                    {getSectionParagraphs(section).map((paragraph, index) => (
+                      <p
+                        key={`${section.heading}-${index}`}
+                        className="text-lg font-medium leading-relaxed text-dark/75 dark:text-light/75 md:text-base"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                  {section.images?.length > 0 && (
+                    <div className="mt-8 grid gap-5 sm:gap-4">
+                      {section.images.map((image, index) => (
+                        <figure key={image.asset?._ref || `${section.heading}-image-${index}`}>
+                          <SanityImage
+                            image={image}
+                            width={1200}
+                            className="aspect-[16/9] w-full rounded-lg border border-solid border-dark/10 object-cover shadow-lg dark:border-light/10"
+                          />
+                          {image.alt && (
+                            <figcaption className="mt-3 text-sm font-medium text-dark/55 dark:text-light/55">
+                              {image.alt}
+                            </figcaption>
+                          )}
+                        </figure>
+                      ))}
+                    </div>
+                  )}
                 </section>
               ))}
             </div>
