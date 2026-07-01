@@ -39,7 +39,7 @@ const BlogPost = ({ post, page, siteSettings }) => {
                 <SanityImage
                   image={post.image}
                   width={1400}
-                  className="mt-10 aspect-[16/9] w-full rounded-lg border border-solid border-dark/10 object-cover shadow-xl dark:border-light/10"
+                  className="mt-10 h-auto w-full rounded-lg border border-solid border-dark/10 shadow-xl dark:border-light/10"
                 />
               )}
             </div>
@@ -65,7 +65,7 @@ const BlogPost = ({ post, page, siteSettings }) => {
                           <SanityImage
                             image={image}
                             width={1200}
-                            className="aspect-[16/9] w-full rounded-lg border border-solid border-dark/10 object-cover shadow-lg dark:border-light/10"
+                            className="h-auto w-full rounded-lg border border-solid border-dark/10 shadow-lg dark:border-light/10"
                           />
                           {image.alt && (
                             <figcaption className="mt-3 text-sm font-medium text-dark/55 dark:text-light/55">
