@@ -32,7 +32,7 @@ const NotFound = ({ siteSettings }) => {
   );
 };
 
-const resolveRoute = (path, data) => {
+const resolveRoute = (path, data, onContentRefresh) => {
   const normalizedPath = normalizePath(path);
   const common = { siteSettings: data.siteSettings };
 
@@ -86,7 +86,12 @@ const resolveRoute = (path, data) => {
   if (normalizedPath.startsWith("/blog/")) {
     const slug = normalizedPath.split("/").pop();
     const post = (data.blogPosts || []).find((item) => item.slug === slug);
-    if (post) return { Component: BlogPost, props: { ...common, post, page: getRoutePage(data.routePages, "blog") } };
+    if (post) {
+      return {
+        Component: BlogPost,
+        props: { ...common, post, page: getRoutePage(data.routePages, "blog"), onContentRefresh },
+      };
+    }
   }
 
   return { Component: NotFound, props: common };
@@ -139,6 +144,21 @@ const App = () => {
   }, [loadPortfolioData]);
 
   useEffect(() => {
+    if (!path.startsWith("/blog/")) return undefined;
+
+    let mounted = true;
+    const isMounted = () => mounted;
+    const intervalId = window.setInterval(() => {
+      if (document.visibilityState === "visible") loadPortfolioData(isMounted);
+    }, 15000);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(intervalId);
+    };
+  }, [loadPortfolioData, path]);
+
+  useEffect(() => {
     const onPopState = () => setPath(normalizePath(window.location.pathname));
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
@@ -170,8 +190,8 @@ const App = () => {
 
   const resolvedRoute = useMemo(() => {
     if (!data) return null;
-    return resolveRoute(path, data);
-  }, [data, path]);
+    return resolveRoute(path, data, loadPortfolioData);
+  }, [data, loadPortfolioData, path]);
 
   if (error) {
     return (

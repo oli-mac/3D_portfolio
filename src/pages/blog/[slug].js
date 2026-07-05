@@ -12,7 +12,7 @@ const getSectionParagraphs = (section) => {
   return section.body.split(/\n{2,}/).filter(Boolean);
 };
 
-const BlogPost = ({ post, page, siteSettings }) => {
+const BlogPost = ({ post, page, siteSettings, onContentRefresh }) => {
   return (
     <>
       <SEO title={post.seo?.title || `${post.title} | ${siteSettings.name}`} description={post.seo?.description || post.excerpt} />
@@ -81,7 +81,7 @@ const BlogPost = ({ post, page, siteSettings }) => {
               ))}
             </div>
 
-            <BlogReactions post={post} />
+            <BlogReactions post={post} onContentRefresh={onContentRefresh} />
           </article>
         </Layout>
       </main>

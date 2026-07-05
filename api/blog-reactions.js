@@ -6,8 +6,10 @@ const MAX_COMMENT_LENGTH = 1000;
 const VALID_REACTIONS = new Set(["thumbsUp", "thumbsDown"]);
 
 const sendJson = (res, status, payload) => {
+  const body = JSON.stringify(payload);
   res.setHeader("Content-Type", "application/json");
-  res.status(status).json(payload);
+  res.statusCode = status;
+  res.end(body);
 };
 
 const sanitizeDocumentIdPart = (value) => value.replace(/[^a-zA-Z0-9_.-]/g, "-");
@@ -53,9 +55,10 @@ module.exports = async function handler(req, res) {
   const reaction = typeof body.reaction === "string" ? body.reaction : "";
   const name = typeof body.name === "string" ? body.name.trim().slice(0, MAX_NAME_LENGTH) : "";
   const comment = typeof body.comment === "string" ? body.comment.trim().slice(0, MAX_COMMENT_LENGTH) : "";
+  const isCommentSubmit = Boolean(comment);
 
-  if (!postId || !visitorId || !name || !VALID_REACTIONS.has(reaction)) {
-    return sendJson(res, 400, { message: "Post, visitor, name, and reaction are required." });
+  if (!postId || !visitorId || !VALID_REACTIONS.has(reaction) || (isCommentSubmit && !name)) {
+    return sendJson(res, 400, { message: "Post, visitor, reaction, and a name for comments are required." });
   }
 
   try {
@@ -70,6 +73,23 @@ module.exports = async function handler(req, res) {
     const visitorHash = getVisitorHash(visitorId);
     const reactionId = `blogReaction.${sanitizeDocumentIdPart(postId)}.${visitorHash}`;
 
+    const patch = {
+      set: {
+        reaction,
+        updatedAt: now,
+      },
+      setIfMissing: {
+        name: "Anonymous",
+        status: "pending",
+      },
+    };
+
+    if (isCommentSubmit) {
+      patch.set.name = name;
+      patch.set.comment = comment;
+      patch.set.status = "pending";
+    }
+
     await client
       .transaction()
       .createIfNotExists({
@@ -77,18 +97,12 @@ module.exports = async function handler(req, res) {
         _type: "blogReaction",
         post: { _type: "reference", _ref: postId },
         visitorHash,
+        name: "Anonymous",
+        status: "pending",
         createdAt: now,
       })
-      .patch(reactionId, {
-        set: {
-          reaction,
-          name,
-          comment,
-          status: "pending",
-          updatedAt: now,
-        },
-      })
-      .commit();
+      .patch(reactionId, patch)
+      .commit({ visibility: "sync" });
 
     const reactionCounts = await client.fetch(
       `{
@@ -99,7 +113,7 @@ module.exports = async function handler(req, res) {
     );
 
     return sendJson(res, 200, {
-      message: "Reaction saved. Comments appear after approval.",
+      message: isCommentSubmit ? "Comment saved. It will appear after approval." : "Reaction saved.",
       reactionCounts,
     });
   } catch (error) {

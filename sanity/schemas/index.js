@@ -243,6 +243,31 @@ const project = {
   type: "document",
   fields: [
     { name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() },
+    {
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        layout: "grid",
+        list: [
+          { title: "ML / AI", value: "ML / AI" },
+          { title: "Fullstack", value: "Fullstack" },
+          { title: "Frontend", value: "Frontend" },
+          { title: "Backend", value: "Backend" },
+          { title: "Data Science", value: "Data Science" },
+          { title: "Other", value: "Other" },
+        ],
+      },
+      validation: (Rule) => Rule.unique(),
+      description: "Controls which filter tabs this project appears under on the portfolio site. You can select more than one.",
+    },
+    {
+      name: "category",
+      title: "Legacy Category",
+      type: "string",
+      hidden: true,
+    },
     { name: "type", title: "Type", type: "string" },
     { name: "period", title: "Period", type: "string" },
     { name: "featured", title: "Featured", type: "boolean" },

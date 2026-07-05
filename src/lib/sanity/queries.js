@@ -3,7 +3,8 @@ import { hasSanityConfig } from "./config";
 
 const imageFields = `{
   ...,
-  asset
+  asset,
+  "assetUrl": asset->url
 }`;
 
 const seoFields = `{
@@ -95,6 +96,8 @@ export const portfolioQuery = `{
   },
   "projects": *[_type == "project"] | order(sortOrder asc) {
     title,
+    categories,
+    category,
     type,
     period,
     featured,

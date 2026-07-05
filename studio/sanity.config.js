@@ -1,7 +1,8 @@
-import { defineConfig } from "sanity";
+import { defineConfig, definePlugin } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "../sanity/schemas/index.js";
+import MarkdownBlogImporter from "./MarkdownBlogImporter.jsx";
 
 const projectId =
   process.env.SANITY_STUDIO_PROJECT_ID || process.env.VITE_SANITY_PROJECT_ID;
@@ -16,12 +17,23 @@ if (!projectId) {
   );
 }
 
+const markdownBlogImporterTool = definePlugin({
+  name: "markdown-blog-importer",
+  tools: [
+    {
+      name: "markdown-blog-importer",
+      title: "Import Blog Markdown",
+      component: MarkdownBlogImporter,
+    },
+  ],
+});
+
 export default defineConfig({
   name: "portfolio",
   title: "Olyad Portfolio CMS",
   projectId,
   dataset,
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool(), markdownBlogImporterTool(), visionTool()],
   schema: {
     types: schemaTypes,
   },
