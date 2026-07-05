@@ -280,6 +280,65 @@ const blogPost = {
   ],
 };
 
+const blogReaction = {
+  name: "blogReaction",
+  title: "Blog Reaction",
+  type: "document",
+  fields: [
+    {
+      name: "post",
+      title: "Blog Post",
+      type: "reference",
+      to: [{ type: "blogPost" }],
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "reaction",
+      title: "Reaction",
+      type: "string",
+      options: {
+        list: [
+          { title: "Thumbs Up", value: "thumbsUp" },
+          { title: "Thumbs Down", value: "thumbsDown" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    { name: "name", title: "Display Name", type: "string", validation: (Rule) => Rule.required() },
+    { name: "comment", title: "Comment", type: "text", rows: 4 },
+    {
+      name: "status",
+      title: "Status",
+      type: "string",
+      initialValue: "pending",
+      options: {
+        list: [
+          { title: "Pending", value: "pending" },
+          { title: "Approved", value: "approved" },
+          { title: "Rejected", value: "rejected" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    { name: "visitorHash", title: "Visitor Hash", type: "string", readOnly: true },
+    { name: "createdAt", title: "Created At", type: "datetime", readOnly: true },
+    { name: "updatedAt", title: "Updated At", type: "datetime", readOnly: true },
+  ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "comment",
+      postTitle: "post.title",
+    },
+    prepare({ title, subtitle, postTitle }) {
+      return {
+        title: title || "Blog reaction",
+        subtitle: [postTitle, subtitle].filter(Boolean).join(" - "),
+      };
+    },
+  },
+};
+
 const publication = {
   name: "publication",
   title: "Publication",
@@ -344,6 +403,7 @@ export const schemaTypes = [
   routePage,
   project,
   blogPost,
+  blogReaction,
   publication,
   skill,
   testimonial,

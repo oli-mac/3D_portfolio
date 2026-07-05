@@ -106,6 +106,7 @@ export const portfolioQuery = `{
     github
   },
   "blogPosts": *[_type == "blogPost"] | order(sortOrder asc) {
+    _id,
     title,
     "slug": slug.current,
     date,
@@ -118,6 +119,23 @@ export const portfolioQuery = `{
       body,
       paragraphs,
       images[] ${imageFields}
+    },
+    "reactionCounts": {
+      "thumbsUp": count(*[_type == "blogReaction" && post._ref == ^._id && reaction == "thumbsUp"]),
+      "thumbsDown": count(*[_type == "blogReaction" && post._ref == ^._id && reaction == "thumbsDown"])
+    },
+    "comments": *[
+      _type == "blogReaction" &&
+      post._ref == ^._id &&
+      status == "approved" &&
+      defined(comment) &&
+      comment != ""
+    ] | order(createdAt desc) {
+      _id,
+      name,
+      comment,
+      reaction,
+      createdAt
     },
     seo ${seoFields}
   },

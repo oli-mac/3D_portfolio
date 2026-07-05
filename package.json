@@ -6,7 +6,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "start": "vite preview --host 127.0.0.1",
-    "lint": "eslint src sanity scripts studio --ext .js,.jsx,.mjs",
+    "lint": "eslint src sanity scripts studio api --ext .js,.jsx,.mjs",
     "studio": "cd studio && XDG_CONFIG_HOME=../.sanity-cache sanity dev --host 127.0.0.1",
     "studio:build": "cd studio && XDG_CONFIG_HOME=../.sanity-cache sanity build",
     "seed:sanity": "node scripts/seedSanity.mjs"

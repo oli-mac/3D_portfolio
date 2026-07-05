@@ -4,6 +4,7 @@ import AnimatedText from "@/components/AnimatedText";
 import TransitionEffect from "@/components/TransitionEffect";
 import SEO from "@/components/SEO";
 import SanityImage from "@/components/SanityImage";
+import BlogReactions from "@/components/BlogReactions";
 
 const getSectionParagraphs = (section) => {
   if (section.paragraphs?.length) return section.paragraphs;
@@ -79,6 +80,8 @@ const BlogPost = ({ post, page, siteSettings }) => {
                 </section>
               ))}
             </div>
+
+            <BlogReactions post={post} />
           </article>
         </Layout>
       </main>
