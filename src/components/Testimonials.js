@@ -101,13 +101,10 @@ const RatingStrip = () => (
       </div>
     </div>
     <div className="flex justify-end">
-      <a
-        href="#contact"
-        className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-base font-bold text-dark shadow-[0_16px_35px_rgba(27,27,27,0.07)] transition-colors hover:bg-dark hover:text-light"
-      >
+      <span className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3 text-base font-bold text-dark shadow-[0_16px_35px_rgba(27,27,27,0.07)]">
         View all reviews
         <span aria-hidden="true" className="text-xl leading-none">&#8599;</span>
-      </a>
+      </span>
     </div>
   </div>
 );

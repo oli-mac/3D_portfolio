@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import {
   DribbbleIcon,
@@ -74,10 +74,13 @@ const SocialLinks = ({ links = [], mobile = false }) => (
           key={`${link.icon}-${link.href}`}
           href={link.href}
           target="_blank"
+          rel="noopener noreferrer"
           aria-label={link.label}
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.9 }}
-          className={`w-6 ${mobile ? "mx-3 sm:mx-1" : "mx-3"}`}
+          className={`w-6 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark dark:focus-visible:outline-light ${
+            mobile ? "mx-3 sm:mx-1" : "mx-3"
+          }`}
         >
           <Icon />
         </motion.a>
@@ -88,8 +91,10 @@ const SocialLinks = ({ links = [], mobile = false }) => (
 
 const ThemeButton = ({ mode, setMode }) => (
   <button
+    type="button"
     onClick={() => setMode(mode === "light" ? "dark" : "light")}
-    className={`ml-3 flex items-center justify-center rounded-full p-1 ${
+    aria-label={mode === "light" ? "Switch to dark mode" : "Switch to light mode"}
+    className={`ml-3 flex items-center justify-center rounded-full p-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark dark:focus-visible:outline-light ${
       mode === "light" ? "bg-dark text-light" : "bg-light text-dark"
     }`}
   >
@@ -107,9 +112,27 @@ const NavBar = ({ currentPath = "/", onNavigate = () => {}, settings }) => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
   return (
     <div className="w-full px-32 py-8 font-medium flex items-center justify-between dark:text-light relative z-10 lg:px-16 md:px-12 sm:px-8">
-      <button className="flex-col justify-center items-center hidden lg:flex" onClick={handleClick}>
+      <button
+        type="button"
+        className="flex-col justify-center items-center hidden lg:flex focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark dark:focus-visible:outline-light"
+        onClick={handleClick}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
+        aria-expanded={isOpen}
+        aria-controls="mobile-nav-menu"
+      >
         <span
           className={`bg-dark dark:bg-light transition-all duration-300 ease-out block h-0.5 w-6 rounded-sm ${
             isOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"
@@ -141,6 +164,7 @@ const NavBar = ({ currentPath = "/", onNavigate = () => {}, settings }) => {
 
       {isOpen ? (
         <motion.div
+          id="mobile-nav-menu"
           initial={{ scale: 0, opacity: 0, x: "-50%", y: "-50%" }}
           animate={{ scale: 1, opacity: 1 }}
           className="min-w-[70vw] flex flex-col justify-between z-30 items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark/90 dark:bg-light/75 rounded-lg backdrop-blur-md py-32"

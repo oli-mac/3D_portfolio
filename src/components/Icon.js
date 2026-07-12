@@ -441,6 +441,219 @@ export const CircularText = ({ className, ...rest }) => (
   </svg>
 );
 
+export const CalendarIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7ZM4 10h16M8 3v4M16 3v4"
+    />
+  </svg>
+);
+
+export const LocationIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 21s-7-6.3-7-11.5A7 7 0 0 1 19 9.5C19 14.7 12 21 12 21Z"
+    />
+    <circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" strokeWidth={2} />
+  </svg>
+);
+
+export const StarBadgeIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth={2} />
+    <path
+      fill="currentColor"
+      d="m12 7 1.4 2.9 3.2.5-2.3 2.2.5 3.2L12 14.3l-2.8 1.5.5-3.2-2.3-2.2 3.2-.5L12 7Z"
+    />
+  </svg>
+);
+
+export const TerminalIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <rect x={3} y={4} width={18} height={16} rx={2} fill="none" stroke="currentColor" strokeWidth={2} />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="m7 9 3 3-3 3M13 15h4"
+    />
+  </svg>
+);
+
+export const BrainIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M12 3a4 4 0 0 0-4 4v1a3 3 0 0 0-2 2.83V14a3 3 0 0 0 2 2.83V19a2 2 0 0 0 4 0M12 3a4 4 0 0 1 4 4v1a3 3 0 0 1 2 2.83V14a3 3 0 0 1-2 2.83V19a2 2 0 0 1-4 0M12 3v16M9 8h1M14 8h1M8 12h1M15 12h1M9 16h1M14 16h1"
+    />
+    <circle cx="18.5" cy="6.5" r="2" fill="none" stroke="currentColor" strokeWidth={1.5} />
+  </svg>
+);
+
+export const CodeIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="m8 6-6 6 6 6M16 6l6 6-6 6"
+    />
+  </svg>
+);
+
+export const DatabaseIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <ellipse cx="12" cy="6" rx="8" ry="3" fill="none" stroke="currentColor" strokeWidth={2} />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"
+    />
+  </svg>
+);
+
+export const CloudIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M7 18a4.5 4.5 0 0 1-.6-8.96A5.5 5.5 0 0 1 17.5 8H18a3.5 3.5 0 0 1 0 7v0"
+    />
+    <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 18h11" />
+  </svg>
+);
+
+export const DocumentStackIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <rect x={5} y={3} width={12} height={15} rx={1.5} fill="none" stroke="currentColor" strokeWidth={2} />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M17 7h2v13a1.5 1.5 0 0 1-1.5 1.5H8"
+    />
+  </svg>
+);
+
+export const ArrowRightIcon = ({ className, ...rest }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    className={`h-auto shrink-0 ${className}`}
+    {...rest}
+  >
+    <path fill="none" d="M0 0h24v24H0z" />
+    <path
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 12h16m0 0-6-6m6 6-6 6"
+    />
+  </svg>
+);
+
 export const LinkArrow = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
